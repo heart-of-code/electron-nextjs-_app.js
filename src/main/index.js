@@ -7,13 +7,17 @@ const isDev = require('electron-is-dev')
 const prepareNext = require('electron-next')
 const { resolve } = require('app-root-path')
 
+const isMac = "darwin" == process.platform
+
 // Prepare the renderer once the app is ready
 app.on('ready', async () => {
   await prepareNext('./src/renderer')
 
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    frame: isMac ? true : true,
+    titleBarStyle: isMac ? 'hidden' : ''
   })
 
   const devPath = 'http://localhost:8000/start'
@@ -26,6 +30,10 @@ app.on('ready', async () => {
 
   const url = isDev ? devPath : prodPath
   mainWindow.loadURL(url)
+
+  // Open the DevTools.
+  mainWindow.webContents.openDevTools()
+
 })
 
 // Quit the app once all windows are closed

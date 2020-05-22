@@ -2,6 +2,9 @@
 out
 .next
 
+# build distributables
+dist
+
 # dependencies
 node_modules
 

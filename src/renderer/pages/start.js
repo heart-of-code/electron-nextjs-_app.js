@@ -1,3 +1,8 @@
-export default () => (
-  <span>This is Next.js speaking</span>
-)
+
+export default (props) => {
+
+  return <p>
+        <span>This is Next.js speaking</span>
+  </p>
+
+}
